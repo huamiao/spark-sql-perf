@@ -7,6 +7,9 @@ sbt/*.jar
 .idea_modules
 *.iml
 
+# IDE
+.vscode
+
 # sbt specific
 build/*.jar
 .cache/

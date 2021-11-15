@@ -5,16 +5,16 @@ name := "spark-sql-perf"
 
 organization := "com.databricks"
 
-scalaVersion := "2.12.10"
+scalaVersion := "2.12.15"
 
-crossScalaVersions := Seq("2.12.10")
+crossScalaVersions := Seq("2.12.15")
 
 sparkPackageName := "databricks/spark-sql-perf"
 
 // All Spark Packages need a license
 licenses := Seq("Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0"))
 
-sparkVersion := "3.0.0"
+sparkVersion := "3.2.0"
 
 sparkComponents ++= Seq("sql", "hive", "mllib")
 
@@ -42,31 +42,31 @@ libraryDependencies += "org.yaml" % "snakeyaml" % "1.23"
 
 fork := true
 
-// Your username to login to Databricks Cloud
-dbcUsername := sys.env.getOrElse("DBC_USERNAME", "")
+// // Your username to login to Databricks Cloud
+// dbcUsername := sys.env.getOrElse("DBC_USERNAME", "")
 
-// Your password (Can be set as an environment variable)
-dbcPassword := sys.env.getOrElse("DBC_PASSWORD", "")
+// // Your password (Can be set as an environment variable)
+// dbcPassword := sys.env.getOrElse("DBC_PASSWORD", "")
 
-// The URL to the Databricks Cloud DB Api. Don't forget to set the port number to 34563!
-dbcApiUrl := sys.env.getOrElse ("DBC_URL", sys.error("Please set DBC_URL"))
+// // The URL to the Databricks Cloud DB Api. Don't forget to set the port number to 34563!
+// dbcApiUrl := sys.env.getOrElse ("DBC_URL", sys.error("Please set DBC_URL"))
 
-// Add any clusters that you would like to deploy your work to. e.g. "My Cluster"
-// or run dbcExecuteCommand
-dbcClusters += sys.env.getOrElse("DBC_USERNAME", "")
+// // Add any clusters that you would like to deploy your work to. e.g. "My Cluster"
+// // or run dbcExecuteCommand
+// dbcClusters += sys.env.getOrElse("DBC_USERNAME", "")
 
-dbcLibraryPath := s"/Users/${sys.env.getOrElse("DBC_USERNAME", "")}/lib"
+// dbcLibraryPath := s"/Users/${sys.env.getOrElse("DBC_USERNAME", "")}/lib"
 
-val runBenchmark = inputKey[Unit]("runs a benchmark")
+// val runBenchmark = inputKey[Unit]("runs a benchmark")
 
-runBenchmark := {
-  import complete.DefaultParsers._
-  val args = spaceDelimited("[args]").parsed
-  val scalaRun = (runner in run).value
-  val classpath = (fullClasspath in Compile).value
-  scalaRun.run("com.databricks.spark.sql.perf.RunBenchmark", classpath.map(_.data), args,
-    streams.value.log)
-}
+// runBenchmark := {
+//   import complete.DefaultParsers._
+//   val args = spaceDelimited("[args]").parsed
+//   val scalaRun = (runner in run).value
+//   val classpath = (fullClasspath in Compile).value
+//   scalaRun.run("com.databricks.spark.sql.perf.RunBenchmark", classpath.map(_.data), args,
+//     streams.value.log)
+// }
 
 
 val runMLBenchmark = inputKey[Unit]("runs an ML benchmark")
@@ -142,7 +142,7 @@ pomExtra := (
       </developers>
     )
 
-bintrayReleaseOnPublish in ThisBuild := false
+//bintrayReleaseOnPublish in ThisBuild := false
 
 // Add publishing to spark packages as another step.
 releaseProcess := Seq[ReleaseStep](
